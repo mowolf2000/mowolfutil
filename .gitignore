@@ -31,4 +31,8 @@
 *.out
 *.app
 
+# Eclipse
+.settings/
+build/
+
 /GitExtensions.settings
