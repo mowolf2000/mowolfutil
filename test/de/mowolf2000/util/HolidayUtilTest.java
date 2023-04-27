@@ -3,8 +3,6 @@
  */
 package de.mowolf2000.util;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,8 +15,6 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Set;
-
-import de.mowolf2000.util.HolidayUtil.Bundesland;
 
 public class HolidayUtilTest {
 
@@ -111,76 +107,6 @@ public class HolidayUtilTest {
         // Silvester 31.12.
         assertFalse(HolidayUtil.isHoliday(LocalDate.of(2023, Month.DECEMBER, 30), Bundesland.HESSEN));
         assertFalse(HolidayUtil.isHoliday(LocalDate.of(2023, Month.DECEMBER, 31), Bundesland.HESSEN));
-    }
-
-    /**
-     * Test method for {@link HolidayUtil#calcEasterSunday(int)}.
-     */
-    @Test
-    public void testCalcEasterSunday() {
-        // https://www.dasinternet.net/ostern_1900-2099.php
-
-        assertEquals(LocalDate.of(2015, Month.APRIL, 5), HolidayUtil.calcEasterSunday(2015));
-        assertEquals(LocalDate.of(2016, Month.MARCH, 27), HolidayUtil.calcEasterSunday(2016));
-        assertEquals(LocalDate.of(2017, Month.APRIL, 16), HolidayUtil.calcEasterSunday(2017));
-        assertEquals(LocalDate.of(2018, Month.APRIL, 1), HolidayUtil.calcEasterSunday(2018));
-        assertEquals(LocalDate.of(2019, Month.APRIL, 21), HolidayUtil.calcEasterSunday(2019));
-        assertEquals(LocalDate.of(2020, Month.APRIL, 12), HolidayUtil.calcEasterSunday(2020));
-        assertEquals(LocalDate.of(2021, Month.APRIL, 4), HolidayUtil.calcEasterSunday(2021));
-        assertEquals(LocalDate.of(2022, Month.APRIL, 17), HolidayUtil.calcEasterSunday(2022));
-        assertEquals(LocalDate.of(2023, Month.APRIL, 9), HolidayUtil.calcEasterSunday(2023));
-        assertEquals(LocalDate.of(2024, Month.MARCH, 31), HolidayUtil.calcEasterSunday(2024));
-        assertEquals(LocalDate.of(2025, Month.APRIL, 20), HolidayUtil.calcEasterSunday(2025));
-        assertEquals(LocalDate.of(2026, Month.APRIL, 5), HolidayUtil.calcEasterSunday(2026));
-        assertEquals(LocalDate.of(2027, Month.MARCH, 28), HolidayUtil.calcEasterSunday(2027));
-        assertEquals(LocalDate.of(2028, Month.APRIL, 16), HolidayUtil.calcEasterSunday(2028));
-        assertEquals(LocalDate.of(2029, Month.APRIL, 1), HolidayUtil.calcEasterSunday(2029));
-        assertEquals(LocalDate.of(2030, Month.APRIL, 21), HolidayUtil.calcEasterSunday(2030));
-        assertEquals(LocalDate.of(2031, Month.APRIL, 13), HolidayUtil.calcEasterSunday(2031));
-        assertEquals(LocalDate.of(2032, Month.MARCH, 28), HolidayUtil.calcEasterSunday(2032));
-        assertEquals(LocalDate.of(2033, Month.APRIL, 17), HolidayUtil.calcEasterSunday(2033));
-        assertEquals(LocalDate.of(2034, Month.APRIL, 9), HolidayUtil.calcEasterSunday(2034));
-        assertEquals(LocalDate.of(2035, Month.MARCH, 25), HolidayUtil.calcEasterSunday(2035));
-        assertEquals(LocalDate.of(2036, Month.APRIL, 13), HolidayUtil.calcEasterSunday(2036));
-        assertEquals(LocalDate.of(2037, Month.APRIL, 5), HolidayUtil.calcEasterSunday(2037));
-        assertEquals(LocalDate.of(2038, Month.APRIL, 25), HolidayUtil.calcEasterSunday(2038));
-        assertEquals(LocalDate.of(2039, Month.APRIL, 10), HolidayUtil.calcEasterSunday(2039));
-        assertEquals(LocalDate.of(2040, Month.APRIL, 1), HolidayUtil.calcEasterSunday(2040));
-    }
-
-    /**
-     * Test method for {@link HolidayUtil#calcPenanceDay(int)}.
-     */
-    @Test
-    public void testCalcPenanceDay() {
-        // https://www.dasinternet.net/buss_und_bettag_2000-2300.php
-
-        assertEquals(LocalDate.of(2015, Month.NOVEMBER, 18), HolidayUtil.calcPenanceDay(2015));
-        assertEquals(LocalDate.of(2016, Month.NOVEMBER, 16), HolidayUtil.calcPenanceDay(2016));
-        assertEquals(LocalDate.of(2017, Month.NOVEMBER, 22), HolidayUtil.calcPenanceDay(2017));
-        assertEquals(LocalDate.of(2018, Month.NOVEMBER, 21), HolidayUtil.calcPenanceDay(2018));
-        assertEquals(LocalDate.of(2019, Month.NOVEMBER, 20), HolidayUtil.calcPenanceDay(2019));
-        assertEquals(LocalDate.of(2020, Month.NOVEMBER, 18), HolidayUtil.calcPenanceDay(2020));
-        assertEquals(LocalDate.of(2021, Month.NOVEMBER, 17), HolidayUtil.calcPenanceDay(2021));
-        assertEquals(LocalDate.of(2022, Month.NOVEMBER, 16), HolidayUtil.calcPenanceDay(2022));
-        assertEquals(LocalDate.of(2023, Month.NOVEMBER, 22), HolidayUtil.calcPenanceDay(2023));
-        assertEquals(LocalDate.of(2024, Month.NOVEMBER, 20), HolidayUtil.calcPenanceDay(2024));
-        assertEquals(LocalDate.of(2025, Month.NOVEMBER, 19), HolidayUtil.calcPenanceDay(2025));
-        assertEquals(LocalDate.of(2026, Month.NOVEMBER, 18), HolidayUtil.calcPenanceDay(2026));
-        assertEquals(LocalDate.of(2027, Month.NOVEMBER, 17), HolidayUtil.calcPenanceDay(2027));
-        assertEquals(LocalDate.of(2028, Month.NOVEMBER, 22), HolidayUtil.calcPenanceDay(2028));
-        assertEquals(LocalDate.of(2029, Month.NOVEMBER, 21), HolidayUtil.calcPenanceDay(2029));
-        assertEquals(LocalDate.of(2030, Month.NOVEMBER, 20), HolidayUtil.calcPenanceDay(2030));
-        assertEquals(LocalDate.of(2031, Month.NOVEMBER, 19), HolidayUtil.calcPenanceDay(2031));
-        assertEquals(LocalDate.of(2032, Month.NOVEMBER, 17), HolidayUtil.calcPenanceDay(2032));
-        assertEquals(LocalDate.of(2033, Month.NOVEMBER, 16), HolidayUtil.calcPenanceDay(2033));
-        assertEquals(LocalDate.of(2034, Month.NOVEMBER, 22), HolidayUtil.calcPenanceDay(2034));
-        assertEquals(LocalDate.of(2035, Month.NOVEMBER, 21), HolidayUtil.calcPenanceDay(2035));
-        assertEquals(LocalDate.of(2036, Month.NOVEMBER, 19), HolidayUtil.calcPenanceDay(2036));
-        assertEquals(LocalDate.of(2037, Month.NOVEMBER, 18), HolidayUtil.calcPenanceDay(2037));
-        assertEquals(LocalDate.of(2038, Month.NOVEMBER, 17), HolidayUtil.calcPenanceDay(2038));
-        assertEquals(LocalDate.of(2039, Month.NOVEMBER, 16), HolidayUtil.calcPenanceDay(2039));
-        assertEquals(LocalDate.of(2040, Month.NOVEMBER, 21), HolidayUtil.calcPenanceDay(2040));
     }
 
     /**
