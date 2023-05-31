@@ -108,6 +108,20 @@ public enum GermanHoliday {
         }
     },
 
+    TagDerBefreiung {
+        @Override
+        public LocalDate calcDate(int year) {
+            return LocalDate.of(year, Month.MAY, 8);
+        }
+    },
+
+    TagDesSieges {
+        @Override
+        public LocalDate calcDate(int year) {
+            return LocalDate.of(year, Month.MAY, 9);
+        }
+    },
+
     ChristiHimmelfahrt {
         @Override
         public LocalDate calcDate(int year) {
@@ -164,6 +178,13 @@ public enum GermanHoliday {
                 return LocalDate.of(year, Month.JUNE, 17);
             }
             return LocalDate.of(year, Month.OCTOBER, 3);
+        }
+    },
+
+    TagDerRepublik {
+        @Override
+        public LocalDate calcDate(int year) {
+            return LocalDate.of(year, Month.OCTOBER, 7);
         }
     },
 

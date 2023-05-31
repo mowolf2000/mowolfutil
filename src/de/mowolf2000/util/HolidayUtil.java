@@ -28,18 +28,10 @@ public class HolidayUtil {
      * @return Set mit allen Feiertagen in dem Jahr für dieses Bundesland
      */
     private static Set<LocalDate> calcHolidaysOfYear(int year, Bundesland bl) {
-        Set<GermanHoliday> holidays = bl.calcHolidays();
+        Set<GermanHoliday> holidays = bl.calcHolidays(year);
         Set<LocalDate> dates = new HashSet<>();
         for (GermanHoliday holiday : holidays) {
             dates.add(holiday.calcDate(year));
-        }
-
-        if (year == 2017) {
-            dates.add(GermanHoliday.Reformationstag.calcDate(year));
-        }
-
-        if (year < 1995) {
-            dates.add(GermanHoliday.BussUndBettag.calcDate(year));
         }
 
         return Collections.unmodifiableSet(dates);

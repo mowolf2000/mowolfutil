@@ -44,10 +44,76 @@ import java.util.Set;
  * - In den restlichen ca. 350 bayerischen Gemeinden (BAYERN_PROT) der Tag kein gesetzlicher Feiertag.
  */
 public enum Bundesland {
+    DDR {
+        @Override
+        public Set<GermanHoliday> calcHolidays(int year) {
+            // https://de.wikipedia.org/wiki/Feiertage_in_der_DDR
+
+            if (year >= 1990) {
+                return GERMANY.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = new HashSet<>();
+
+            holidays.add(GermanHoliday.Neujahr);
+            holidays.add(GermanHoliday.Karfreitag);
+            holidays.add(GermanHoliday.Ostersonntag);
+            holidays.add(GermanHoliday.TagDerArbeit);
+            holidays.add(GermanHoliday.Pfingstsonntag);
+            holidays.add(GermanHoliday.Pfingstmontag);
+            holidays.add(GermanHoliday.TagDerRepublik);
+            holidays.add(GermanHoliday.Weihnachten1);
+            holidays.add(GermanHoliday.Weihnachten2);
+
+            if (year <= 1967) {
+                holidays.add(GermanHoliday.Ostermontag);
+                holidays.add(GermanHoliday.ChristiHimmelfahrt);
+            }
+            if (year <= 1967 || year == 1985) {
+                holidays.add(GermanHoliday.TagDerBefreiung);
+            }
+            if (year == 1975) {
+                holidays.add(GermanHoliday.TagDesSieges);
+            }
+            if (year <= 1966) {
+                holidays.add(GermanHoliday.Reformationstag);
+                holidays.add(GermanHoliday.BussUndBettag);
+            }
+            return holidays;
+        }
+    },
+    GERMANY {
+        @Override
+        public Set<GermanHoliday> calcHolidays(int year) {
+            // https://www.dgb.de/gesetzliche-feiertage-deutschland
+
+            Set<GermanHoliday> holidays = new HashSet<>();
+
+            holidays.add(GermanHoliday.Neujahr);
+            holidays.add(GermanHoliday.Karfreitag);
+            holidays.add(GermanHoliday.Ostersonntag);
+            holidays.add(GermanHoliday.Ostermontag);
+            holidays.add(GermanHoliday.TagDerArbeit);
+            holidays.add(GermanHoliday.ChristiHimmelfahrt);
+            holidays.add(GermanHoliday.Pfingstsonntag);
+            holidays.add(GermanHoliday.Pfingstmontag);
+            holidays.add(GermanHoliday.TagDerDeutschenEinheit);
+            holidays.add(GermanHoliday.Weihnachten1);
+            holidays.add(GermanHoliday.Weihnachten2);
+
+            if (year == 2017) {
+                holidays.add(GermanHoliday.Reformationstag);
+            }
+            if (year < 1995) {
+                holidays.add(GermanHoliday.BussUndBettag);
+            }
+
+            return holidays;
+        }
+    },
     BADEN_WUERTEMBERG {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Hl3Koenige);
             holidays.add(GermanHoliday.Fronleichnam);
@@ -58,8 +124,8 @@ public enum Bundesland {
     },
     BAYERN_KATH {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Hl3Koenige);
             holidays.add(GermanHoliday.Fronleichnam);
@@ -71,8 +137,8 @@ public enum Bundesland {
     },
     BAYERN_PROT {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Hl3Koenige);
             holidays.add(GermanHoliday.Fronleichnam);
@@ -83,8 +149,8 @@ public enum Bundesland {
     },
     BAYERN_AUGSBURG {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Hl3Koenige);
             holidays.add(GermanHoliday.Fronleichnam);
@@ -97,8 +163,8 @@ public enum Bundesland {
     },
     BERLIN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.InternationalerFrauentag);
 
@@ -107,8 +173,11 @@ public enum Bundesland {
     },
     BRANDENBURG {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
 
@@ -117,8 +186,8 @@ public enum Bundesland {
     },
     BREMEN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
 
@@ -127,8 +196,8 @@ public enum Bundesland {
     },
     HAMBURG {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
 
@@ -137,8 +206,8 @@ public enum Bundesland {
     },
     HESSEN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
 
@@ -147,8 +216,11 @@ public enum Bundesland {
     },
     MECKLENBURG_VORPOMMERN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.InternationalerFrauentag);
             holidays.add(GermanHoliday.Reformationstag);
@@ -158,8 +230,8 @@ public enum Bundesland {
     },
     NIEDERSACHSEN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
 
@@ -168,8 +240,8 @@ public enum Bundesland {
     },
     NORDRHEIN_WESTFALEN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
             holidays.add(GermanHoliday.Allerheiligen);
@@ -179,8 +251,8 @@ public enum Bundesland {
     },
     RHEINLAND_PFALZ {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
             holidays.add(GermanHoliday.Allerheiligen);
@@ -190,8 +262,8 @@ public enum Bundesland {
     },
     SAARLAND {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
             holidays.add(GermanHoliday.MariaeHimmelfahrt);
@@ -202,8 +274,11 @@ public enum Bundesland {
     },
     SACHSEN_ANHALT {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Hl3Koenige);
             holidays.add(GermanHoliday.Reformationstag);
@@ -213,8 +288,11 @@ public enum Bundesland {
     },
     SACHSEN_PROT {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
             holidays.add(GermanHoliday.BussUndBettag);
@@ -224,8 +302,11 @@ public enum Bundesland {
     },
     SACHSEN_KATH {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
             holidays.add(GermanHoliday.Reformationstag);
@@ -236,8 +317,8 @@ public enum Bundesland {
     },
     SCHLESWIG_HOLSTEIN {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Reformationstag);
 
@@ -246,8 +327,11 @@ public enum Bundesland {
     },
     THUERINGEN_PROT {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Weltkindertag);
             holidays.add(GermanHoliday.Reformationstag);
@@ -257,8 +341,11 @@ public enum Bundesland {
     },
     THUERINGEN_KATH {
         @Override
-        public Set<GermanHoliday> calcHolidays() {
-            Set<GermanHoliday> holidays = globalHolidays();
+        public Set<GermanHoliday> calcHolidays(int year) {
+            if (year < 1990) {
+                return DDR.calcHolidays(year);
+            }
+            Set<GermanHoliday> holidays = GERMANY.calcHolidays(year);
 
             holidays.add(GermanHoliday.Fronleichnam);
             holidays.add(GermanHoliday.Weltkindertag);
@@ -268,25 +355,5 @@ public enum Bundesland {
         }
     };
 
-    public abstract Set<GermanHoliday> calcHolidays();
-
-    static Set<GermanHoliday> globalHolidays() {
-        // https://www.dgb.de/gesetzliche-feiertage-deutschland
-
-        Set<GermanHoliday> holidays = new HashSet<>();
-
-        holidays.add(GermanHoliday.Neujahr);
-        holidays.add(GermanHoliday.Karfreitag);
-        holidays.add(GermanHoliday.Ostersonntag);
-        holidays.add(GermanHoliday.Ostermontag);
-        holidays.add(GermanHoliday.TagDerArbeit);
-        holidays.add(GermanHoliday.ChristiHimmelfahrt);
-        holidays.add(GermanHoliday.Pfingstsonntag);
-        holidays.add(GermanHoliday.Pfingstmontag);
-        holidays.add(GermanHoliday.TagDerDeutschenEinheit);
-        holidays.add(GermanHoliday.Weihnachten1);
-        holidays.add(GermanHoliday.Weihnachten2);
-
-        return holidays;
-    }
+    public abstract Set<GermanHoliday> calcHolidays(int year);
 }
